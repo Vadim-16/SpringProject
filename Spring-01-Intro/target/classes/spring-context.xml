@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="examService" class="ca.purpose.edu.ExamServiceImpl">
+        <constructor-arg name="examiner" ref="examiner"/>
+        <constructor-arg name="examPath" value=".\\Spring-01-Intro\\src\\main\\resources\\QuestionsWithAnswers.csv"/>
+    </bean>
+
+    <bean id="examiner" class="ca.purpose.edu.Examiners.ExaminerImpl">
+        <constructor-arg name="examFormer" ref="examFormer"/>
+    </bean>
+
+    <bean id="examFormer" class="ca.purpose.edu.ExamFormers.ExamFormerImpl">
+        <constructor-arg type="String" value=".\\Spring-01-Intro\\src\\main\\resources\\QuestionsWithAnswers.csv"/>
+    </bean>
+
+</beans>
