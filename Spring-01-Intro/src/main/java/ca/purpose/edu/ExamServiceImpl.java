@@ -3,8 +3,8 @@ package ca.purpose.edu;
 import ca.purpose.edu.Examiners.Examiner;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ExamServiceImpl implements ExamService{
-    private static String examPath;// = ".\\Spring-01-Intro\\src\\main\\resources\\QuestionsWithAnswers.csv";
+public class ExamServiceImpl implements ExamService {
+    private static String examPath;
     private final Examiner examiner;
 
 
@@ -15,15 +15,7 @@ public class ExamServiceImpl implements ExamService{
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(".\\spring-context.xml");
-//        ExamFormer examFormer = context.getBean(ExamFormerImpl.class);
-//        Examiner examiner = context.getBean(ExaminerImpl.class);
         ExamServiceImpl examService = context.getBean(ExamServiceImpl.class);
-
-//        ExamFormer examFormer = new ExamFormerImpl(examPath);
-//        Examiner examiner = new ExaminerImpl(examFormer);
-//        ExamService examService = new ExamServiceImpl(examiner);
-
-
         examService.runService(new Student());
     }
 
@@ -33,8 +25,4 @@ public class ExamServiceImpl implements ExamService{
                 + "! Your mark: " + student.getMark());
         System.out.println(student);
     }
-
-//    public void setExamPath(String examPath) {
-//        ExamServiceImpl.examPath = examPath;
-//    }
 }

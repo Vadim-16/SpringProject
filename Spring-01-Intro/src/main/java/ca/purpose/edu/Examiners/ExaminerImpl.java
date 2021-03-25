@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.List;
 
 
-public class ExaminerImpl implements Examiner{
+public class ExaminerImpl implements Examiner {
     private final ExamFormer examFormer;
 
     public ExaminerImpl(ExamFormer examFormer) {
@@ -25,9 +25,9 @@ public class ExaminerImpl implements Examiner{
     }
 
     private void initStudent(Student student, BufferedReader consoleReader) throws IOException {
-        System.out.print("Please enter your first name:");
+        System.out.print("Please enter your first name: ");
         student.setFirstName(consoleReader.readLine());
-        System.out.print("Please enter your last name:");
+        System.out.print("Please enter your last name: ");
         student.setLastName(consoleReader.readLine());
     }
 

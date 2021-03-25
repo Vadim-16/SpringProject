@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExamFormerImpl implements ExamFormer {
-    private List<String> questionsWithAnswers;
+    private final List<String> questionsWithAnswers;
 
     public ExamFormerImpl(String examPath) {
         this.questionsWithAnswers = extractQuestionsWithAnswers(examPath);
@@ -43,5 +43,4 @@ public class ExamFormerImpl implements ExamFormer {
         }
         return questions;
     }
-
 }
