@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileExtractor implements Extractor{
-    private String examPath;
+    private final String examPath;
 
     public FileExtractor(String examPath) {
         this.examPath = examPath;

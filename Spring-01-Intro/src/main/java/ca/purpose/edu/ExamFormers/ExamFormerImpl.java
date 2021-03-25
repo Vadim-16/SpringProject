@@ -6,21 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExamFormerImpl implements ExamFormer {
-    private final List<String> questionsWithAnswers;
-    private final List<Question> questionnaire = new ArrayList<>();
+    private final List<Question> questionnaire;
 
     public ExamFormerImpl(Extractor extractor) {
-        questionsWithAnswers = extractor.extractQuestionsWithAnswers();
-        prepareQuestions();
+        List<String> questionsWithAnswers = extractor.extractQuestionsWithAnswers();
+        this.questionnaire = prepareQuestions(questionsWithAnswers);
     }
 
-    private void prepareQuestions() {
+    private List<Question> prepareQuestions(List<String> questionsWithAnswers) {
+        List<Question> questionnaire = new ArrayList<>();
         for (String line : questionsWithAnswers) {
             Question question = new Question();
             question.setQuestion(line.split(",")[0]);
             question.setAnswer(line.split(",")[1]);
-            this.questionnaire.add(question);
+            questionnaire.add(question);
         }
+        return questionnaire;
     }
 
     public List<Question> getQuestionnaire() {
