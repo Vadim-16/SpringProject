@@ -11,7 +11,6 @@ public class ExamFormerImpl implements ExamFormer {
 
     public ExamFormerImpl(Extractor extractor) {
         questionsWithAnswers = extractor.extractQuestionsWithAnswers();
-        System.out.println(questionsWithAnswers);
         prepareQuestions();
     }
 
