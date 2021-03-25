@@ -4,12 +4,9 @@ import ca.purpose.edu.Examiners.Examiner;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ExamServiceImpl implements ExamService {
-    private static String examPath;
     private final Examiner examiner;
 
-
-    public ExamServiceImpl(String examPath, Examiner examiner) {
-        this.examPath = examPath;
+    public ExamServiceImpl(Examiner examiner) {
         this.examiner = examiner;
     }
 

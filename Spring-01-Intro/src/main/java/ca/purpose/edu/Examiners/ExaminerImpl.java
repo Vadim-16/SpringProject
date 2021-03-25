@@ -4,7 +4,6 @@ import ca.purpose.edu.ExamFormers.ExamFormer;
 import ca.purpose.edu.Student;
 
 import java.io.*;
-import java.util.List;
 
 
 public class ExaminerImpl implements Examiner {
@@ -33,11 +32,9 @@ public class ExaminerImpl implements Examiner {
 
     private void evaluateStudent(Student student, BufferedReader consoleReader) throws IOException {
         int mark = 0;
-        List<String> questions = examFormer.parseQuestions();
-        List<String> answers = examFormer.parseAnswers();
-        for (int i = 0; i < questions.size(); i++) {
-            System.out.println(questions.get(i));
-            if (consoleReader.readLine().equalsIgnoreCase(answers.get(i))) {
+        for (int i = 0; i < examFormer.getQuestionnaire().size(); i++) {
+            System.out.println(examFormer.getQuestion(i).getQuestion());
+            if (consoleReader.readLine().equalsIgnoreCase(examFormer.getQuestion(i).getAnswer())) {
                 mark++;
             }
         }

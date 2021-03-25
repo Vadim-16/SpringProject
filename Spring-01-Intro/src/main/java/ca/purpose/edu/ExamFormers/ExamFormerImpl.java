@@ -1,46 +1,35 @@
 package ca.purpose.edu.ExamFormers;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import ca.purpose.edu.ExamFormers.Extractors.Extractor;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExamFormerImpl implements ExamFormer {
     private final List<String> questionsWithAnswers;
+    private final List<Question> questionnaire = new ArrayList<>();
 
-    public ExamFormerImpl(String examPath) {
-        this.questionsWithAnswers = extractQuestionsWithAnswers(examPath);
+    public ExamFormerImpl(Extractor extractor) {
+        questionsWithAnswers = extractor.extractQuestionsWithAnswers();
+        System.out.println(questionsWithAnswers);
+        prepareQuestions();
     }
 
-    private List<String> extractQuestionsWithAnswers(String examPath) {
-        List<String> questionsWithAnswers = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(examPath))) {
-            while (reader.ready()) {
-                String line = reader.readLine();
-                questionsWithAnswers.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return questionsWithAnswers;
-    }
-
-    @Override
-    public List<String> parseQuestions() {
-        List<String> questions = new ArrayList<>();
+    private void prepareQuestions() {
         for (String line : questionsWithAnswers) {
-            questions.add(line.split(",")[0]);
+            Question question = new Question();
+            question.setQuestion(line.split(",")[0]);
+            question.setAnswer(line.split(",")[1]);
+            this.questionnaire.add(question);
         }
-        return questions;
     }
 
-    @Override
-    public List<String> parseAnswers() {
-        List<String> questions = new ArrayList<>();
-        for (String line : questionsWithAnswers) {
-            questions.add(line.split(",")[1]);
-        }
-        return questions;
+    public List<Question> getQuestionnaire() {
+        return questionnaire;
     }
+
+    public Question getQuestion(int questionNumber) {
+        return this.questionnaire.get(questionNumber);
+    }
+
 }

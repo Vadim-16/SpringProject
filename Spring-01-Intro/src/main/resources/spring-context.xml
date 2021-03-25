@@ -3,18 +3,21 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
+
     <bean id="examService" class="ca.purpose.edu.ExamServiceImpl">
-        <constructor-arg name="examPath" ref="examPath"/>
         <constructor-arg name="examiner" ref="examiner"/>
     </bean>
     <bean id="examiner" class="ca.purpose.edu.Examiners.ExaminerImpl">
         <constructor-arg name="examFormer" ref="examFormer"/>
     </bean>
     <bean id="examFormer" class="ca.purpose.edu.ExamFormers.ExamFormerImpl">
+        <constructor-arg name="extractor" ref="fileExtractor"/>
+    </bean>
+    <bean id="fileExtractor" class="ca.purpose.edu.ExamFormers.Extractors.FileExtractor">
         <constructor-arg type="String" ref="examPath"/>
     </bean>
     <bean id="examPath"
           class="java.lang.String">
-        <constructor-arg value=".\\Spring-01-Intro\\src\\main\\resources\\QuestionsWithAnswers.csv" />
+        <constructor-arg value=".\\Spring-01-Intro\\src\\main\\resources\\QuestionsWithAnswers.csv"/>
     </bean>
 </beans>
