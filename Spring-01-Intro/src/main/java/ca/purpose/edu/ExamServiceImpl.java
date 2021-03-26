@@ -16,6 +16,7 @@ public class ExamServiceImpl implements ExamService {
         examService.runService(new Student());
     }
 
+    @Override
     public void runService(Student student) {
         student = examiner.runExam(student);
         System.out.println("Thank you for your answers, " + student.getFirstName() + " " + student.getLastName()
