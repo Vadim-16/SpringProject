@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBQuestionExtractor implements QuestionExtractor{
-    private List<Question> questionnaire;
+    private final Connection connection;
 
     public DBQuestionExtractor(Connection connection) {
-        this.questionnaire = extractQuestionsWithAnswers(connection);
+        this.connection = connection;
     }
 
-    public List<Question> extractQuestionsWithAnswers(Connection connection) {
+    @Override
+    public List<Question> getQuestionnaire() {
         List<Question> questionnaire = new ArrayList<>();
         //imitation of business logic for retrieval from DB
         Question question1 = new Question();
@@ -41,11 +42,6 @@ public class DBQuestionExtractor implements QuestionExtractor{
         question5.setAnswer("1945");
         questionnaire.add(question5);
 
-        return questionnaire;
-    }
-
-    @Override
-    public List<Question> getQuestionnaire() {
         return questionnaire;
     }
 }

@@ -8,14 +8,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileQuestionExtractor implements QuestionExtractor{
-    private final List<Question> questionnaire;
+public class FileQuestionExtractor implements QuestionExtractor {
+    private final String examPath;
 
     public FileQuestionExtractor(String examPath) {
-        this.questionnaire = extractQuestionnaire(examPath);
+        this.examPath = examPath;
     }
 
-    private List<Question> extractQuestionnaire(String examPath) {
+    @Override
+    public List<Question> getQuestionnaire() {
         List<Question> questionsWithAnswers = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(examPath))) {
             while (reader.ready()) {
@@ -29,10 +30,5 @@ public class FileQuestionExtractor implements QuestionExtractor{
             e.printStackTrace();
         }
         return questionsWithAnswers;
-    }
-
-    @Override
-    public List<Question> getQuestionnaire() {
-        return questionnaire;
     }
 }
