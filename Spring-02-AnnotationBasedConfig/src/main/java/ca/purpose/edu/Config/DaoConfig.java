@@ -16,5 +16,4 @@ public class DaoConfig {
     public QuestionExtractor questionExtractor(@Value("${examPath_ru}")String examPath) {
         return new FileQuestionExtractor(examPath);
     }
-
 }

@@ -35,8 +35,9 @@ public class ExamServiceImpl implements ExamService {
     public void runService(Student student) {
         student = examiner.runExam(student);
         MessageSource ms = messageSource();
-        System.out.println(ms.getMessage("result.msg", new String[]{student.getFirstName(), student.getLastName(),
-                String.valueOf(student.getMark())}, Locale.forLanguageTag("ru")));
+        String result = ms.getMessage("result.msg", new String[]{student.getFirstName(), student.getLastName(),
+                String.valueOf(student.getMark())}, Locale.forLanguageTag("ru"));
+        System.out.println(result);
     }
 
     private MessageSource messageSource() {
