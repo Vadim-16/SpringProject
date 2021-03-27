@@ -4,16 +4,16 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="examService" class="ca.purpose.edu.ExamServiceImpl">
+    <bean id="examService" class="ca.purpose.ExamServiceImpl">
         <constructor-arg name="examiner" ref="examiner"/>
     </bean>
-    <bean id="examiner" class="ca.purpose.edu.Examiners.ExaminerImpl">
+    <bean id="examiner" class="ca.purpose.ExaminerImpl">
         <constructor-arg name="examFormer" ref="examFormer"/>
     </bean>
-    <bean id="examFormer" class="ca.purpose.edu.ExamFormers.ExamFormerImpl">
+    <bean id="examFormer" class="ca.purpose.ExamFormerImpl">
         <constructor-arg name="questionExtractor" ref="fileQuestionExtractor"/>
     </bean>
-    <bean id="fileQuestionExtractor" class="ca.purpose.edu.ExamFormers.Extractors.FileQuestionExtractor">
+    <bean id="fileQuestionExtractor" class="ca.purpose.FileQuestionExtractor">
         <constructor-arg type="String" ref="examPath"/>
     </bean>
     <bean id="examPath"
