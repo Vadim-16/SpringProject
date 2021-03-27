@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
-import java.util.ListResourceBundle;
 import java.util.Locale;
 
 @Configuration
@@ -40,15 +39,7 @@ public class ExamServiceImpl implements ExamService {
                 String.valueOf(student.getMark())}, Locale.forLanguageTag("ru")));
     }
 
-
     private MessageSource messageSource() {
-        ListResourceBundle resourceBundle = new ListResourceBundle() {
-
-            @Override
-            protected Object[][] getContents() {
-                return new Object[0][];
-            }
-        };
         ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
         ms.setBasename("/message");
         ms.setDefaultEncoding("Windows-1251");
