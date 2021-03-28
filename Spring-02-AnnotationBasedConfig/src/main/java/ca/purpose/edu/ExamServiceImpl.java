@@ -21,7 +21,7 @@ public class ExamServiceImpl implements ExamService {
 
 
     public static void main(String[] args) {
-        ServicesConfig.locale = "ru";
+        ServicesConfig.locale = Locale.forLanguageTag("ru");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ExamServiceImpl.class);
         ExamServiceImpl examService = context.getBean(ExamServiceImpl.class);
         examService.runService(new Student());
@@ -33,7 +33,7 @@ public class ExamServiceImpl implements ExamService {
         student = examiner.runExam(student);
         MessageSource ms = messageSource();
         String result = ms.getMessage("result.msg", new String[]{student.getFirstName(), student.getLastName(),
-                String.valueOf(student.getMark())}, Locale.forLanguageTag(ServicesConfig.locale));
+                String.valueOf(student.getMark())}, ServicesConfig.locale);
         System.out.println(result);
     }
 

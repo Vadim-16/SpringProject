@@ -1,9 +1,10 @@
 package ca.purpose.edu.examiners;
 
+import ca.purpose.edu.Student;
 import ca.purpose.edu.config.ServicesConfig;
 import ca.purpose.edu.examFormers.ExamFormer;
 import ca.purpose.edu.examFormers.Question;
-import ca.purpose.edu.Student;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -30,13 +31,12 @@ public class ExaminerImpl implements Examiner {
     }
 
     private void initStudent(Student student, BufferedReader consoleReader) throws IOException {
-        if (ServicesConfig.locale.equalsIgnoreCase("ru")) {
-            System.out.print("Введите ваше имя: ");
-        } else System.out.print("Please enter your first name: ");
+        MessageSource ms = ServicesConfig.messageSource("/message");
+        String askFirstName = ms.getMessage("first.name", null, ServicesConfig.locale);
+        String askLastName = ms.getMessage("last.name", null, ServicesConfig.locale);
+        System.out.println(askFirstName);
         student.setFirstName(consoleReader.readLine());
-        if (ServicesConfig.locale.equalsIgnoreCase("ru")) {
-            System.out.print("Введите вашу фамилию: ");
-        } else System.out.print("Please enter your last name: ");
+        System.out.println(askLastName);
         student.setLastName(consoleReader.readLine());
     }
 
