@@ -1,6 +1,6 @@
 package ca.purpose.edu;
 
-import ca.purpose.edu.Examiners.Examiner;
+import ca.purpose.edu.examiners.Examiner;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ExamServiceImpl implements ExamService {

@@ -1,10 +1,12 @@
-package ca.purpose.edu.ExamFormers.Extractors;
+package ca.purpose.edu.examFormers.extractors;
 
-import ca.purpose.edu.ExamFormers.Question;
+import ca.purpose.edu.examFormers.Question;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class DBQuestionExtractor implements QuestionExtractor{
 
     @Override

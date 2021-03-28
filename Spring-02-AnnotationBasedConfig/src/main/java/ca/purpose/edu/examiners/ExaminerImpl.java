@@ -1,14 +1,16 @@
-package ca.purpose.edu.Examiners;
+package ca.purpose.edu.examiners;
 
-import ca.purpose.edu.ExamFormers.ExamFormer;
-import ca.purpose.edu.ExamFormers.Question;
+import ca.purpose.edu.config.ServicesConfig;
+import ca.purpose.edu.examFormers.ExamFormer;
+import ca.purpose.edu.examFormers.Question;
 import ca.purpose.edu.Student;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
+@Service
 public class ExaminerImpl implements Examiner {
     private final ExamFormer examFormer;
 
@@ -28,9 +30,13 @@ public class ExaminerImpl implements Examiner {
     }
 
     private void initStudent(Student student, BufferedReader consoleReader) throws IOException {
-        System.out.print("Please enter your first name: ");
+        if (ServicesConfig.locale.equalsIgnoreCase("ru")) {
+            System.out.print("Введите ваше имя: ");
+        } else System.out.print("Please enter your first name: ");
         student.setFirstName(consoleReader.readLine());
-        System.out.print("Please enter your last name: ");
+        if (ServicesConfig.locale.equalsIgnoreCase("ru")) {
+            System.out.print("Введите вашу фамилию: ");
+        } else System.out.print("Please enter your last name: ");
         student.setLastName(consoleReader.readLine());
     }
 

@@ -1,14 +1,16 @@
-package ca.purpose.edu.ExamFormers;
+package ca.purpose.edu.examFormers;
 
-import ca.purpose.edu.ExamFormers.Extractors.QuestionExtractor;
-
+import ca.purpose.edu.examFormers.extractors.QuestionExtractor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ExamFormerImpl implements ExamFormer {
     private final List<Question> questionnaire;
 
-    public ExamFormerImpl(QuestionExtractor questionExtractor) {
+    public ExamFormerImpl(@Qualifier("fileQuestionExtractor") QuestionExtractor questionExtractor) {
         this.questionnaire = questionExtractor.getQuestionnaire();
     }
 

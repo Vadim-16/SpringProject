@@ -1,6 +1,6 @@
-package ca.purpose.edu.ExamFormers.Extractors;
+package ca.purpose.edu.examFormers.extractors;
 
-import ca.purpose.edu.ExamFormers.Question;
+import ca.purpose.edu.examFormers.Question;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

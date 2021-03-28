@@ -1,4 +1,4 @@
-package ca.purpose.edu.ExamFormers;
+package ca.purpose.edu.examFormers;
 
 public class Question {
     private String question;

@@ -1,4 +1,4 @@
-package ca.purpose.edu.Examiners;
+package ca.purpose.edu.examiners;
 
 import ca.purpose.edu.Student;
 
