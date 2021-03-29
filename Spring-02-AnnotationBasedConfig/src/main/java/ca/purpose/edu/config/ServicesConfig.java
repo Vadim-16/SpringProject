@@ -2,12 +2,12 @@ package ca.purpose.edu.config;
 
 
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.stereotype.Component;
 
 import java.util.Locale;
 
-@Component("config")
+@Configuration("config")
 public class ServicesConfig {
     public static Locale locale = Locale.ENGLISH;
 

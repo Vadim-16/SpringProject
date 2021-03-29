@@ -1,4 +1,6 @@
-package ca.purpose.edu.examFormers;
+package ca.purpose.edu.examformers;
+
+import ca.purpose.edu.models.Question;
 
 import java.util.List;
 

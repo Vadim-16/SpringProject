@@ -1,4 +1,4 @@
-package ca.purpose.edu.examFormers;
+package ca.purpose.edu.examformers;
 
 import java.util.List;
 

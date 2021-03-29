@@ -1,4 +1,4 @@
-package ca.purpose.edu;
+package ca.purpose.edu.models;
 
 public class Student {
     private String firstName;

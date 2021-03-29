@@ -1,7 +1,7 @@
 package ca.purpose.edu.examiners;
 
-import ca.purpose.edu.examFormers.ExamFormer;
-import ca.purpose.edu.examFormers.Question;
+import ca.purpose.edu.examformers.ExamFormer;
+import ca.purpose.edu.examformers.Question;
 import ca.purpose.edu.Student;
 
 import java.io.*;

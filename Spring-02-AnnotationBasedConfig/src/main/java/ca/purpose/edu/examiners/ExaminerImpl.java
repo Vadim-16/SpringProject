@@ -1,9 +1,9 @@
 package ca.purpose.edu.examiners;
 
-import ca.purpose.edu.Student;
+import ca.purpose.edu.models.Student;
 import ca.purpose.edu.config.ServicesConfig;
-import ca.purpose.edu.examFormers.ExamFormer;
-import ca.purpose.edu.examFormers.Question;
+import ca.purpose.edu.examformers.ExamFormer;
+import ca.purpose.edu.models.Question;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 

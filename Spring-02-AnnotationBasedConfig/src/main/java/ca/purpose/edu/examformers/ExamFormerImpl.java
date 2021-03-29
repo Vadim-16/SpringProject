@@ -1,6 +1,7 @@
-package ca.purpose.edu.examFormers;
+package ca.purpose.edu.examformers;
 
-import ca.purpose.edu.examFormers.extractors.QuestionExtractor;
+import ca.purpose.edu.examformers.extractors.QuestionExtractor;
+import ca.purpose.edu.models.Question;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 

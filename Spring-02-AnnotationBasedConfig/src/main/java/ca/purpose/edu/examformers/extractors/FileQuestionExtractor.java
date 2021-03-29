@@ -1,6 +1,9 @@
-package ca.purpose.edu.examFormers.extractors;
+package ca.purpose.edu.examformers.extractors;
 
-import ca.purpose.edu.examFormers.Question;
+import ca.purpose.edu.models.Question;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,10 +11,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@PropertySource("classpath:app.properties")
 public class FileQuestionExtractor implements QuestionExtractor {
     private final String examPath;
 
-    public FileQuestionExtractor(String examPath) {
+    public FileQuestionExtractor(@Value("#{'${examPath}'.concat('_').concat(config.locale).concat('.csv')}") String examPath) {
         this.examPath = examPath;
     }
 
@@ -32,3 +37,4 @@ public class FileQuestionExtractor implements QuestionExtractor {
         return questionsWithAnswers;
     }
 }
+

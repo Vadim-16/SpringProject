@@ -1,6 +1,6 @@
-package ca.purpose.edu.examFormers;
+package ca.purpose.edu.examformers;
 
-import ca.purpose.edu.examFormers.extractors.QuestionExtractor;
+import ca.purpose.edu.examformers.extractors.QuestionExtractor;
 
 
 import java.util.List;
