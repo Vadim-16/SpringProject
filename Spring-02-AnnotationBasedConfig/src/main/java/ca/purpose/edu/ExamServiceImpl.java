@@ -19,7 +19,7 @@ public class ExamServiceImpl implements ExamService {
     }
 
     public static void main(String[] args) {
-        ServicesConfig.locale = Locale.forLanguageTag("ru");
+        ServicesConfig.locale = Locale.forLanguageTag("ru"); //default = en
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ExamServiceImpl.class);
         ExamServiceImpl examService = context.getBean(ExamServiceImpl.class);
         examService.runService(new Student());

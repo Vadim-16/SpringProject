@@ -16,7 +16,7 @@ import java.util.List;
 public class FileQuestionExtractor implements QuestionExtractor {
     private final String examPath;
 
-    public FileQuestionExtractor(@Value("#{'${examPath}'.concat(config.locale).concat('.csv')}") String examPath) {
+    public FileQuestionExtractor(@Value("#{'${examPath}'.concat('_').concat(config.locale).concat('.csv')}") String examPath) {
         this.examPath = examPath;
     }
 
