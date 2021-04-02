@@ -1,6 +1,7 @@
 package ca.purpose.edu.examformers.extractors;
 
 import ca.purpose.edu.models.Question;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -10,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class FileQuestionExtractorTest {
 
     @Test
-    void getQuestionnaire() {
+    @DisplayName("test proper reading from file")
+    void testGetQuestionnaire() {
         FileQuestionExtractor fileQuestionExtractor = new FileQuestionExtractor(".\\src\\test\\test-resources\\test-questions_ru.csv");
         List<Question> questionnaire = fileQuestionExtractor.getQuestionnaire();
 
