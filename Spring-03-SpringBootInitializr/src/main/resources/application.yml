@@ -1,2 +1,6 @@
 locale: ru
 examPath: .\\Spring-03-SpringBootInitializr\\src\\main\\resources\\Questions\\questions
+
+logging:
+   level:
+     root: OFF
