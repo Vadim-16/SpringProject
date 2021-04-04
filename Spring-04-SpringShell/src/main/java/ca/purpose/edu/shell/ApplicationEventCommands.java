@@ -1,9 +1,11 @@
 package ca.purpose.edu.shell;
 
+import ca.purpose.edu.ExamService;
 import ca.purpose.edu.ExamServiceImpl;
 import ca.purpose.edu.Main;
 import ca.purpose.edu.models.Student;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -17,6 +19,9 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class ApplicationEventCommands {
     private String userName;
+
+    @Autowired
+    private ExamService examService;
 
 
     @ShellMethod(value = "Login command", key = {"l", "login"})
@@ -34,12 +39,7 @@ public class ApplicationEventCommands {
 
     @ShellMethod(value = "Start exam", key = {"s", "start"})
     public void start() {
-        if (userName == null) {
-            System.out.println("Сначала залогиньтесь");
-            return;
-        }
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
-        ExamServiceImpl examService = context.getBean(ExamServiceImpl.class);
-        examService.runService(new Student());
+        if (userName == null) System.out.println("Сначала залогиньтесь");
+        else examService.runService(new Student());
     }
 }
