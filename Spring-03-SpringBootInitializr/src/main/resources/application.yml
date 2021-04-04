@@ -3,4 +3,4 @@ examPath: .\\Spring-03-SpringBootInitializr\\src\\main\\resources\\Questions\\qu
 
 logging:
    level:
-     root: OFF
+     root: INFO

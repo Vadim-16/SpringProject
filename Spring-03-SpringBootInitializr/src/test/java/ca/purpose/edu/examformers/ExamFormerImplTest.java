@@ -1,21 +1,15 @@
 package ca.purpose.edu.examformers;
 
-import ca.purpose.edu.examformers.extractors.FileQuestionExtractor;
-import ca.purpose.edu.examformers.extractors.QuestionExtractor;
+
 import ca.purpose.edu.models.Question;
+
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Stubber;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.context.annotation.Import;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,52 +18,47 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
+@Import(MyTestConfig.class)
 class ExamFormerImplTest {
-
-    @Autowired
-    @Qualifier("fileQuestionExtractor")
-    private QuestionExtractor fileQuestionExtractor;
 
     @Autowired
     private ExamFormer examFormer;
 
     private static List<Question> testQuestions;
 
-
-
     @Test
     @DisplayName("test random pull")
     void testPullRandomQuestion() {
-//        ExamFormerImpl examFormer = new ExamFormerImpl(fileQuestionExtractor);
         Question question1 = examFormer.pullRandomQuestion();
+        assertTrue(testQuestions.contains(question1));
+    }
+
+
+    @Test
+    @DisplayName("test proper questionnaire return")
+    void testGetQuestionnaire() {
+        List<Question> questionnaire = examFormer.getQuestionnaire();
+        assertEquals(questionnaire, testQuestions);
+    }
+
+    @Test
+    @DisplayName("test proper question return")
+    void testGetQuestion() {
+        Question question1 = examFormer.getQuestion(0);
         assertEquals(question1, testQuestions.get(0));
     }
 
-//    @Test
-//    @DisplayName("test proper questionnaire return")
-//    void testGetQuestionnaire() {
-//        Mockito.when(fileQuestionExtractor.getQuestionnaire()).thenReturn(testQuestions);
-//        ExamFormerImpl examFormer = new ExamFormerImpl(fileQuestionExtractor);
-//        List<Question> questionnaire = examFormer.getQuestionnaire();
-//        assertEquals(questionnaire, testQuestions);
-//    }
-//
-//    @Test
-//    @DisplayName("test proper question return")
-//    void testGetQuestion() {
-//        Mockito.when(fileQuestionExtractor.getQuestionnaire()).thenReturn(testQuestions);
-//        ExamFormerImpl examFormer = new ExamFormerImpl(fileQuestionExtractor);
-//        Question question1 = examFormer.getQuestion(0);
-//        assertEquals(question1, testQuestions.get(0));
-//    }
-
     @BeforeAll
     static void createQuestions() {
-        Question question = new Question();
-        question.setQuestion("testing?");
-        question.setAnswer("yes");
+        Question question1 = new Question();
+        question1.setQuestion("Это тест?");
+        question1.setAnswer("Да");
+        Question question2 = new Question();
+        question2.setQuestion("Как долго тестим?");
+        question2.setAnswer("Это всё");
         ArrayList<Question> testQuestions = new ArrayList<>();
-        testQuestions.add(question);
+        testQuestions.add(question1);
+        testQuestions.add(question2);
         ExamFormerImplTest.testQuestions = testQuestions;
     }
 

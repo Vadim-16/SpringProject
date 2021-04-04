@@ -1,6 +1,7 @@
 package ca.purpose.edu.examformers.extractors;
 
 import ca.purpose.edu.models.Question;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

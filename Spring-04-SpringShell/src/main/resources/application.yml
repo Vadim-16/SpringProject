@@ -1,6 +1,9 @@
 locale: ru
 examPath: .\\Spring-03-SpringBootInitializr\\src\\main\\resources\\Questions\\questions
 
+spring:
+  banner: location=classpath:Banner.txt
+
 logging:
    level:
      root: OFF
