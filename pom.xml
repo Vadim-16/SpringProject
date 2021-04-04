@@ -19,6 +19,7 @@
         <module>Spring-01-Intro</module>
         <module>Spring-02-AnnotationBasedConfig</module>
         <module>Spring-03-SpringBootInitializr</module>
+        <module>Spring-04-SpringShell</module>
     </modules>
 
     <dependencies>
