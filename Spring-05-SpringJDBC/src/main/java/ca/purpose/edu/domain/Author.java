@@ -1,8 +1,11 @@
 package ca.purpose.edu.domain;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@AllArgsConstructor
+@Data
 public class Author {
-    private String fullName;
-    private List<Book> books;
+    private long authorId;
+    private String authorName;
 }
