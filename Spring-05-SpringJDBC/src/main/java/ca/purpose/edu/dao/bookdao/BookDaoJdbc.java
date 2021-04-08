@@ -40,7 +40,7 @@ public class BookDaoJdbc implements BookDao {
         map.put("authorId", book.getAuthorId());
         map.put("genreId", book.getGenreId());
         namedJdbc.update("insert into books (bookId, `bookTitle`, authorId, genreId)" +
-                                      " VALUES (:bookId, :bookTitle, :authorId, :genreId)", map);
+                " VALUES (:bookId, :bookTitle, :authorId, :genreId)", map);
     }
 
     @Override
@@ -52,6 +52,16 @@ public class BookDaoJdbc implements BookDao {
     public void deleteById(long bookId) {
         Map<String, Long> map = Collections.singletonMap("bookId", bookId);
         namedJdbc.update("delete from books where bookId = :bookId", map);
+    }
+
+    @Override
+    public void update(Book book) {
+        final HashMap<String, Object> map = new HashMap<>(4);
+        map.put("bookId", book.getBookId());
+        map.put("bookTitle", book.getBookTitle());
+        map.put("authorId", book.getAuthorId());
+        map.put("genreId", book.getAuthorId());
+        namedJdbc.update("update books set bookTitle = :bookTitle, authorId = :authorId, genreId = :genreId where bookId = :bookId", map);
     }
 
     private static class BookMapper implements RowMapper<Book> {

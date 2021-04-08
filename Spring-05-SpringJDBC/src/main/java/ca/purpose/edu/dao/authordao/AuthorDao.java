@@ -14,4 +14,6 @@ public interface AuthorDao {
     List<Author> getAll();
 
     void deleteById(long authorId);
+
+    void update(Author author);
 }

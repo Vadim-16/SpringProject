@@ -49,6 +49,14 @@ public class AuthorDaoJdbc implements AuthorDao {
         namedJdbc.update("delete from Authors where authorId = :authorId", map);
     }
 
+    @Override
+    public void update(Author author) {
+        final HashMap<String, Object> map = new HashMap<>(2);
+        map.put("authorId", author.getAuthorId());
+        map.put("authorName", author.getAuthorName());
+        namedJdbc.update("update Authors set authorName = :authorName where authorId = :authorId", map);
+    }
+
     private static class AuthorMapper implements RowMapper<Author> {
         @Override
         public Author mapRow(ResultSet resultSet, int i) throws SQLException {

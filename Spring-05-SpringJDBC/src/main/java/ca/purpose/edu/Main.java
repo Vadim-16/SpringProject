@@ -28,6 +28,8 @@ public class Main {
         bookDao.insert(new Book(4, "Interstellar", 2, 3));
         System.out.println(bookDao.getById(4));
         System.out.println(bookDao.getAll());
+        bookDao.update(new Book(1, "Wizard", 3, 1));
+        System.out.println(bookDao.getById(1));
 
         System.out.println("Total authors " + authorDao.count());
         authorDao.deleteById(2);
@@ -35,6 +37,8 @@ public class Main {
         authorDao.insert(new Author(4, "Pushkin"));
         System.out.println(authorDao.getById(4));
         System.out.println(authorDao.getAll());
+        authorDao.update(new Author(1, "Elizabeth"));
+        System.out.println(authorDao.getById(1));
 
 
         System.out.println("Total genres " + genreDao.count());
