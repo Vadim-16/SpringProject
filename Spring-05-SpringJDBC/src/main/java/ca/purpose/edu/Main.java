@@ -47,6 +47,8 @@ public class Main {
         genreDao.insert(new Genre(4, "Thriller"));
         System.out.println(genreDao.getById(4));
         System.out.println(genreDao.getAll());
+        genreDao.update(new Genre(1, "Science"));
+        System.out.println(genreDao.getById(1));
 
     }
 }

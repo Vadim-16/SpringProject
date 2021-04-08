@@ -49,6 +49,14 @@ public class GenreDaoJdbc implements GenreDao {
         namedJdbc.update("delete from Genres where genreId = :genreId", map);
     }
 
+    @Override
+    public void update(Genre genre) {
+        final HashMap<String, Object> map = new HashMap<>(2);
+        map.put("genreId", genre.getGenreId());
+        map.put("genre", genre.getGenre());
+        namedJdbc.update("update Genres set genre = :genre where genreId = :genreId", map);
+    }
+
     private static class GenreMapper implements RowMapper<Genre> {
         @Override
         public Genre mapRow(ResultSet resultSet, int i) throws SQLException {
