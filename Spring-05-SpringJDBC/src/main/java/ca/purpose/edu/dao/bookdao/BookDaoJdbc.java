@@ -1,7 +1,7 @@
 package ca.purpose.edu.dao.bookdao;
 
 import ca.purpose.edu.domain.Book;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
@@ -14,10 +14,15 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-@AllArgsConstructor
 @SuppressWarnings({"SqlNoDataSourceInspection", "ConstantConditions", "SqlDialectInspection"})
 public class BookDaoJdbc implements BookDao {
+
     private final NamedParameterJdbcOperations namedJdbc;
+
+    @Autowired
+    public BookDaoJdbc(NamedParameterJdbcOperations namedJdbc) {
+        this.namedJdbc = namedJdbc;
+    }
 
 
     @Override
