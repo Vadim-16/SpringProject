@@ -3,6 +3,7 @@ package ca.purpose.edu.dao.bookdao;
 import ca.purpose.edu.domain.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 
@@ -27,7 +28,7 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public Book getById(long bookId) {
-        Map<String, Long> map = Collections.singletonMap("bookId", bookId);
+        final MapSqlParameterSource map = new MapSqlParameterSource("bookId", bookId);
         return namedJdbc.queryForObject("select * from books where bookId = :bookId", map, new BookMapper());
     }
 
@@ -39,11 +40,11 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public void insert(Book book) {
-        final HashMap<String, Object> map = new HashMap<>(4);
-        map.put("bookId", book.getBookId());
-        map.put("bookTitle", book.getBookTitle());
-        map.put("authorId", book.getAuthorId());
-        map.put("genreId", book.getGenreId());
+        final MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("bookId", book.getBookId());
+        map.addValue("bookTitle", book.getBookTitle());
+        map.addValue("authorId", book.getAuthorId());
+        map.addValue("genreId", book.getGenreId());
         namedJdbc.update("insert into books (bookId, `bookTitle`, authorId, genreId)" +
                 " VALUES (:bookId, :bookTitle, :authorId, :genreId)", map);
     }
@@ -55,17 +56,17 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public void deleteById(long bookId) {
-        Map<String, Long> map = Collections.singletonMap("bookId", bookId);
+        final MapSqlParameterSource map = new MapSqlParameterSource("bookId", bookId);
         namedJdbc.update("delete from books where bookId = :bookId", map);
     }
 
     @Override
     public void update(Book book) {
-        final HashMap<String, Object> map = new HashMap<>(4);
-        map.put("bookId", book.getBookId());
-        map.put("bookTitle", book.getBookTitle());
-        map.put("authorId", book.getAuthorId());
-        map.put("genreId", book.getAuthorId());
+        final MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("bookId", book.getBookId());
+        map.addValue("bookTitle", book.getBookTitle());
+        map.addValue("authorId", book.getAuthorId());
+        map.addValue("genreId", book.getAuthorId());
         namedJdbc.update("update books set bookTitle = :bookTitle, authorId = :authorId, genreId = :genreId where bookId = :bookId", map);
     }
 
