@@ -23,7 +23,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+@SpringBootTest(classes = Main.class)
 @ExtendWith(SpringExtension.class)
 public class BookDaoJdbcTest {
 

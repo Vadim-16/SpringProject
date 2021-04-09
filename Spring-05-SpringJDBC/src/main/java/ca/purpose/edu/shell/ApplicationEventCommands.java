@@ -9,11 +9,11 @@ import ca.purpose.edu.domain.Genre;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
+import org.springframework.shell.ExitRequest;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
-import javax.validation.constraints.Null;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -102,5 +102,10 @@ public class ApplicationEventCommands {
             case "author" -> authorDao.insert(new Author(objectId, objectName));
             case "genre" -> genreDao.insert(new Genre(objectId, objectName));
         }
+    }
+
+    @ShellMethod(value = "Exit the shell", key = {"quit", "exit"})
+    public void quit() {
+        throw new ExitRequest();
     }
 }
