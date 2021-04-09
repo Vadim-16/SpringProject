@@ -103,9 +103,4 @@ public class ApplicationEventCommands {
             case "genre" -> genreDao.insert(new Genre(objectId, objectName));
         }
     }
-
-    @ShellMethod(value = "Exit the shell", key = {"quit", "exit"})
-    public void quit() {
-        throw new ExitRequest();
-    }
 }
