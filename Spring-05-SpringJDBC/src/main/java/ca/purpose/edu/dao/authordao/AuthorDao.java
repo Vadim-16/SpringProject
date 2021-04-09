@@ -10,7 +10,7 @@ public interface AuthorDao {
 
     void deleteById(long authorId);
 
-    void insert(Author author);
+    long insert(Author author);
 
     void update(Author author);
 

@@ -10,4 +10,6 @@ public class Book {
     private String bookTitle;
     private long authorId;
     private long genreId;
+//    private Author author;
+//    private Genre genre;
 }

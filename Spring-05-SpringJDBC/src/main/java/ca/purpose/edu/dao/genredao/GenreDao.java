@@ -10,7 +10,7 @@ public interface GenreDao {
 
     void deleteById(long genreId);
 
-    void insert(Genre genre);
+    long insert(Genre genre);
 
     void update(Genre genre);
 

@@ -146,20 +146,20 @@ public class ApplicationEventCommands {
     }
 
     @ShellMethod(value = "Insert object", key = {"i", "insert"})
-    public void insert(String object, long objectId, String objectName,
+    public void insert(String object, String objectName,
                        @ShellOption(defaultValue = "0") long authorId, @ShellOption(defaultValue = "0") long genreId) {
         if (userName == null) System.out.println("Please login");
         else switch (object.toLowerCase()) {
             case "book": {
-                bookDao.insert(new Book(objectId, objectName, authorId, genreId));
+                System.out.println("Generated bookId: " + bookDao.insert(new Book(0, objectName, authorId, genreId)));
                 break;
             }
             case "author": {
-                authorDao.insert(new Author(objectId, objectName));
+                System.out.println("Generated authorId: " + authorDao.insert(new Author(0, objectName)));
                 break;
             }
             case "genre": {
-                genreDao.insert(new Genre(objectId, objectName));
+                System.out.println("Generated genreId: " + genreDao.insert(new Genre(0, objectName)));
                 break;
             }
             default:

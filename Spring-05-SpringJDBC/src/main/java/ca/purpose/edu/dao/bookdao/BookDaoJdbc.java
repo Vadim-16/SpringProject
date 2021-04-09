@@ -2,11 +2,16 @@ package ca.purpose.edu.dao.bookdao;
 
 import ca.purpose.edu.domain.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;
@@ -17,6 +22,12 @@ import java.util.Map;
 @Repository
 @SuppressWarnings({"SqlNoDataSourceInspection", "ConstantConditions", "SqlDialectInspection"})
 public class BookDaoJdbc implements BookDao {
+    private final String SQL_GET_BY_ID = "select * from books where bookId = :bookId";
+    private final String SQL_COUNT = "select count(*) from books";
+    private final String SQL_INSERT = "insert into books (`bookTitle`, authorId, genreId) VALUES (?, ?, ?)";
+    private final String SQL_GET_ALL = "select * from books";
+    private final String SQL_DELETE_BY_ID = "delete from books where bookId = :bookId";
+    private final String SQL_UPDATE = "update books set bookTitle = :bookTitle, authorId = :authorId, genreId = :genreId where bookId = :bookId";
 
     private final NamedParameterJdbcOperations namedJdbc;
 
@@ -25,49 +36,45 @@ public class BookDaoJdbc implements BookDao {
         this.namedJdbc = namedJdbc;
     }
 
-
     @Override
     public Book getById(long bookId) {
         final MapSqlParameterSource map = new MapSqlParameterSource("bookId", bookId);
-        return namedJdbc.queryForObject("select * from books where bookId = :bookId", map, new BookMapper());
+        return namedJdbc.queryForObject(SQL_GET_BY_ID, map, new BookMapper());
     }
 
 
     @Override
     public int count() {
-        return namedJdbc.queryForObject("select count(*) from books", (Map<String, ?>) null, Integer.class);
+        return namedJdbc.queryForObject(SQL_COUNT, (Map<String, ?>) null, Integer.class);
     }
 
     @Override
-    public void insert(Book book) {
-        final MapSqlParameterSource map = new MapSqlParameterSource();
-        map.addValue("bookId", book.getBookId());
-        map.addValue("bookTitle", book.getBookTitle());
-        map.addValue("authorId", book.getAuthorId());
-        map.addValue("genreId", book.getGenreId());
-        namedJdbc.update("insert into books (bookId, `bookTitle`, authorId, genreId)" +
-                " VALUES (:bookId, :bookTitle, :authorId, :genreId)", map);
+    public long insert(Book book) {
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        PreparedStatementCreator preparedStatementCreator = connection -> {
+            PreparedStatement ps = connection.prepareStatement(SQL_INSERT, new String[]{"bookId"});
+            ps.setString(1, book.getBookTitle());
+            ps.setLong(2, book.getAuthorId());
+            ps.setLong(3, book.getGenreId());
+            return ps;
+        };
+        namedJdbc.getJdbcOperations().update(preparedStatementCreator, keyHolder);
+        return (long) keyHolder.getKey();
     }
 
     @Override
     public List<Book> getAll() {
-        return namedJdbc.query("select * from books", new BookMapper());
+        return namedJdbc.query(SQL_GET_ALL, new BookMapper());
     }
 
     @Override
     public void deleteById(long bookId) {
-        final MapSqlParameterSource map = new MapSqlParameterSource("bookId", bookId);
-        namedJdbc.update("delete from books where bookId = :bookId", map);
+        namedJdbc.update(SQL_DELETE_BY_ID, new MapSqlParameterSource("bookId", bookId));
     }
 
     @Override
     public void update(Book book) {
-        final MapSqlParameterSource map = new MapSqlParameterSource();
-        map.addValue("bookId", book.getBookId());
-        map.addValue("bookTitle", book.getBookTitle());
-        map.addValue("authorId", book.getAuthorId());
-        map.addValue("genreId", book.getAuthorId());
-        namedJdbc.update("update books set bookTitle = :bookTitle, authorId = :authorId, genreId = :genreId where bookId = :bookId", map);
+        namedJdbc.update(SQL_UPDATE, new BeanPropertySqlParameterSource(book));
     }
 
     private static class BookMapper implements RowMapper<Book> {
