@@ -59,13 +59,15 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     @Override
-    public void deleteById(long authorId) {
-        namedJdbc.update(SQL_DELETE_BY_ID, new MapSqlParameterSource("authorId", authorId));
+    public boolean deleteById(long authorId) {
+        int update = namedJdbc.update(SQL_DELETE_BY_ID, new MapSqlParameterSource("authorId", authorId));
+        return update == 1;
     }
 
     @Override
-    public void update(Author author) {
-        namedJdbc.update(SQL_UPDATE, new BeanPropertySqlParameterSource(author));
+    public boolean update(Author author) {
+        int update = namedJdbc.update(SQL_UPDATE, new BeanPropertySqlParameterSource(author));
+        return update == 1;
     }
 
     private static class AuthorMapper implements RowMapper<Author> {

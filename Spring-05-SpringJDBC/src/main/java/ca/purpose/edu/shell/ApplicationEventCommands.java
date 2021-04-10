@@ -105,21 +105,26 @@ public class ApplicationEventCommands {
     @ShellMethod(value = "Delete object by Id", key = {"d", "delete"})
     public void delete(String objectName, long objectId) {
         if (userName == null) System.out.println("Please login");
-        else switch (objectName.toLowerCase()) {
-            case "book": {
-                bookDao.deleteById(objectId);
-                break;
+        else {
+            boolean isDeleted = false;
+            switch (objectName.toLowerCase()) {
+                case "book": {
+                    isDeleted = bookDao.deleteById(objectId);
+                    break;
+                }
+                case "author": {
+                    isDeleted = authorDao.deleteById(objectId);
+                    break;
+                }
+                case "genre": {
+                    isDeleted = genreDao.deleteById(objectId);
+                    break;
+                }
+                default:
+                    System.out.println("Improper object query: " + objectName);
             }
-            case "author": {
-                authorDao.deleteById(objectId);
-                break;
-            }
-            case "genre": {
-                genreDao.deleteById(objectId);
-                break;
-            }
-            default:
-                System.out.println("Improper object query: " + objectName);
+            String message = isDeleted ? "Delete successful" : "Delete failed";
+            System.out.println(message);
         }
     }
 
@@ -127,21 +132,28 @@ public class ApplicationEventCommands {
     public void update(String object, long objectId, String objectName,
                        @ShellOption(defaultValue = "0") long authorId, @ShellOption(defaultValue = "0") long genreId) {
         if (userName == null) System.out.println("Please login");
-        else switch (object.toLowerCase()) {
-            case "book": {
-                bookDao.update(new Book(objectId, objectName, authorId, genreId));
-                break;
+        else {
+            boolean isUpdated = false;
+            switch (object.toLowerCase()) {
+                case "book": {
+                    Author author = authorDao.getById(authorId);
+                    Genre genre = genreDao.getById(genreId);
+                    isUpdated = bookDao.update(new Book(objectId, objectName, author, genre));
+                    break;
+                }
+                case "author": {
+                    isUpdated = authorDao.update(new Author(objectId, objectName));
+                    break;
+                }
+                case "genre": {
+                    isUpdated = genreDao.update(new Genre(objectId, objectName));
+                    break;
+                }
+                default:
+                    System.out.println("Improper object query: " + object);
             }
-            case "author": {
-                authorDao.update(new Author(objectId, objectName));
-                break;
-            }
-            case "genre": {
-                genreDao.update(new Genre(objectId, objectName));
-                break;
-            }
-            default:
-                System.out.println("Improper object query: " + objectName);
+            String message = (isUpdated) ? "Update successful" : "Update failed";
+            System.out.println(message);
         }
     }
 
@@ -151,7 +163,9 @@ public class ApplicationEventCommands {
         if (userName == null) System.out.println("Please login");
         else switch (object.toLowerCase()) {
             case "book": {
-                System.out.println("Generated bookId: " + bookDao.insert(new Book(0, objectName, authorId, genreId)));
+                Author author = authorDao.getById(authorId);
+                Genre genre = genreDao.getById(genreId);
+                System.out.println("Generated bookId: " + bookDao.insert(new Book(0, objectName, author, genre)));
                 break;
             }
             case "author": {

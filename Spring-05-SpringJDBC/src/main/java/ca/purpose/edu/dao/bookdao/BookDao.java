@@ -8,11 +8,11 @@ public interface BookDao {
 
     Book getById(long bookId);
 
-    void deleteById(long bookId);
+    boolean deleteById(long bookId);
 
     long insert(Book book);
 
-    void update(Book book);
+    boolean update(Book book);
 
     List<Book> getAll();
 

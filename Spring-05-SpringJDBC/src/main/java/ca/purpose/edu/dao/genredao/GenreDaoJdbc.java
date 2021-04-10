@@ -59,13 +59,15 @@ public class GenreDaoJdbc implements GenreDao {
     }
 
     @Override
-    public void deleteById(long genreId) {
-        namedJdbc.update(SQL_DELETE_BY_ID, new MapSqlParameterSource("genreId", genreId));
+    public boolean deleteById(long genreId) {
+        int update = namedJdbc.update(SQL_DELETE_BY_ID, new MapSqlParameterSource("genreId", genreId));
+        return update == 1;
     }
 
     @Override
-    public void update(Genre genre) {
-        namedJdbc.update(SQL_UPDATE, new BeanPropertySqlParameterSource(genre));
+    public boolean update(Genre genre) {
+        int update = namedJdbc.update(SQL_UPDATE, new BeanPropertySqlParameterSource(genre));
+        return update == 1;
     }
 
     private static class GenreMapper implements RowMapper<Genre> {

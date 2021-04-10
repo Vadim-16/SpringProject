@@ -8,8 +8,6 @@ import lombok.Data;
 public class Book {
     private long bookId;
     private String bookTitle;
-    private long authorId;
-    private long genreId;
-//    private Author author;
-//    private Genre genre;
+    private Author author;
+    private Genre genre;
 }
