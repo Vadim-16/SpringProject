@@ -2,7 +2,6 @@ package ca.purpose.edu.dao.genredao;
 
 import ca.purpose.edu.domain.Genre;
 import lombok.AllArgsConstructor;
-import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;

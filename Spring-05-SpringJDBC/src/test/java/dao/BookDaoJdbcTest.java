@@ -23,17 +23,17 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(classes = Main.class)
+@SpringBootTest(classes = BookDao.class)
 @ExtendWith(SpringExtension.class)
 public class BookDaoJdbcTest {
 
     @Autowired
-    private BookDaoJdbc bookDaoJdbc;
+    private BookDao bookDao;
 
     @Test
     @DisplayName("test getById() method")
     public void testGetById(){
-        Book book1 = bookDaoJdbc.getById(1);
+        Book book1 = bookDao.getById(1);
         assertEquals(book1.getBookId(), 1);
     }
 }

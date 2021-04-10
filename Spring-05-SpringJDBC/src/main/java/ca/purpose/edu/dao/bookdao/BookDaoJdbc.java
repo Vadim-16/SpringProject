@@ -1,8 +1,8 @@
 package ca.purpose.edu.dao.bookdao;
 
 import ca.purpose.edu.domain.Book;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -14,12 +14,12 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
 @Repository
+@AllArgsConstructor
 @SuppressWarnings({"SqlNoDataSourceInspection", "ConstantConditions", "SqlDialectInspection"})
 public class BookDaoJdbc implements BookDao {
     private final String SQL_GET_BY_ID = "select * from books where bookId = :bookId";
@@ -29,12 +29,8 @@ public class BookDaoJdbc implements BookDao {
     private final String SQL_DELETE_BY_ID = "delete from books where bookId = :bookId";
     private final String SQL_UPDATE = "update books set bookTitle = :bookTitle, authorId = :authorId, genreId = :genreId where bookId = :bookId";
 
-    private final NamedParameterJdbcOperations namedJdbc;
 
-    @Autowired
-    public BookDaoJdbc(NamedParameterJdbcOperations namedJdbc) {
-        this.namedJdbc = namedJdbc;
-    }
+    private final NamedParameterJdbcOperations namedJdbc;
 
     @Override
     public Book getById(long bookId) {
