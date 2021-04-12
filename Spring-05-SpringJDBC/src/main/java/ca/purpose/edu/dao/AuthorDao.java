@@ -1,4 +1,4 @@
-package ca.purpose.edu.dao.authordao;
+package ca.purpose.edu.dao;
 
 import ca.purpose.edu.domain.Author;
 

@@ -1,4 +1,4 @@
-package ca.purpose.edu.dao.bookdao;
+package ca.purpose.edu.dao;
 
 import ca.purpose.edu.domain.Book;
 

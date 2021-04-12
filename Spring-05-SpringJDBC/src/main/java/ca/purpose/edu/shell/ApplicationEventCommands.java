@@ -1,8 +1,8 @@
 package ca.purpose.edu.shell;
 
-import ca.purpose.edu.dao.authordao.AuthorDao;
-import ca.purpose.edu.dao.bookdao.BookDao;
-import ca.purpose.edu.dao.genredao.GenreDao;
+import ca.purpose.edu.dao.AuthorDao;
+import ca.purpose.edu.dao.BookDao;
+import ca.purpose.edu.dao.GenreDao;
 import ca.purpose.edu.domain.Author;
 import ca.purpose.edu.domain.Book;
 import ca.purpose.edu.domain.Genre;

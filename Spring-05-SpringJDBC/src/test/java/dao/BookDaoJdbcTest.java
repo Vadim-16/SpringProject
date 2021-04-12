@@ -1,33 +1,29 @@
 package dao;
 
-import ca.purpose.edu.Main;
-import ca.purpose.edu.dao.authordao.AuthorDaoJdbc;
-import ca.purpose.edu.dao.bookdao.BookDao;
-import ca.purpose.edu.dao.bookdao.BookDaoJdbc;
-import ca.purpose.edu.dao.genredao.GenreDaoJdbc;
+import ca.purpose.edu.dao.BookDao;
 import ca.purpose.edu.domain.Book;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
-@ExtendWith(SpringExtension.class)
+
+//@ExtendWith(SpringExtension.class)
+@JdbcTest
+@Sql({"test-schema.sql", "test-data.sql"})
 public class BookDaoJdbcTest {
 
-    @MockBean
-    private NamedParameterJdbcOperations namedJdbc;
+//    @MockBean
+//    private NamedParameterJdbcOperations namedJdbc;
 
     @Autowired
     private BookDao bookDao;

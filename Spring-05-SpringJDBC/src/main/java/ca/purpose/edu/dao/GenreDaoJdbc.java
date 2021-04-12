@@ -1,4 +1,4 @@
-package ca.purpose.edu.dao.genredao;
+package ca.purpose.edu.dao;
 
 import ca.purpose.edu.domain.Genre;
 import lombok.AllArgsConstructor;

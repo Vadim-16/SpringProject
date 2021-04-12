@@ -1,8 +1,7 @@
-package ca.purpose.edu.dao.authordao;
+package ca.purpose.edu.dao;
 
 import ca.purpose.edu.domain.Author;
 import lombok.AllArgsConstructor;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -55,7 +54,7 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     @Override
     public List<Author> getAll() {
-        return namedJdbc.query(SQL_GET_ALL, BeanPropertyRowMapper.newInstance(Author.class));
+        return namedJdbc.query(SQL_GET_ALL, new AuthorMapper());
     }
 
     @Override
@@ -70,7 +69,7 @@ public class AuthorDaoJdbc implements AuthorDao {
         return update == 1;
     }
 
-    private static class AuthorMapper implements RowMapper<Author> {
+    private class AuthorMapper implements RowMapper<Author> {
         @Override
         public Author mapRow(ResultSet resultSet, int i) throws SQLException {
             long authorId = resultSet.getLong("authorId");
