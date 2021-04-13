@@ -1,23 +1,13 @@
 package ca.purpose.edu.examformers;
 
 
-import ca.purpose.edu.examformers.extractors.FileQuestionExtractor;
-import ca.purpose.edu.examformers.extractors.QuestionExtractor;
 import ca.purpose.edu.models.Question;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Answers;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.MockBeans;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
@@ -28,11 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
+@Import(MyTestConfig.class)
 class ExamFormerImplTest {
-
-    @MockBean
-    @Qualifier("FileQuestionExtractor")
-    private QuestionExtractor questionExtractor;
 
     @Autowired
     private ExamFormer examFormer;

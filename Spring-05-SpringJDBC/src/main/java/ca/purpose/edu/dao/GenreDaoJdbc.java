@@ -22,7 +22,7 @@ import java.util.Map;
 public class GenreDaoJdbc implements GenreDao {
     private final String SQL_GET_BY_ID = "select * from Genres where genreId = :genreId";
     private final String SQL_COUNT = "select count(*) from Genres";
-    private final String SQL_INSERT = "insert into Genres (genre) values (?)";
+    private final String SQL_INSERT = "insert into Genres (genre) values (:genre)";
     private final String SQL_GET_ALL = "select * from Genres";
     private final String SQL_DELETE_BY_ID = "delete from Genres where genreId = :genreId";
     private final String SQL_UPDATE = "update Genres set genre = :genre where genreId = :genreId";
@@ -44,12 +44,7 @@ public class GenreDaoJdbc implements GenreDao {
     @Override
     public long insert(Genre genre) {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        PreparedStatementCreator preparedStatementCreator = connection -> {
-            PreparedStatement ps = connection.prepareStatement(SQL_INSERT, new String[]{"genreId"});
-            ps.setString(1, genre.getGenre());
-            return ps;
-        };
-        namedJdbc.getJdbcOperations().update(preparedStatementCreator, keyHolder);
+        namedJdbc.update(SQL_INSERT, new BeanPropertySqlParameterSource(genre), keyHolder);
         return (long) keyHolder.getKey();
     }
 

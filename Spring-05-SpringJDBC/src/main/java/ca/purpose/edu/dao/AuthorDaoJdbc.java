@@ -22,7 +22,7 @@ import java.util.Map;
 public class AuthorDaoJdbc implements AuthorDao {
     private final String SQL_GET_BY_ID = "select * from Authors where authorId = :authorId";
     private final String SQL_COUNT = "select count(*) from Authors";
-    private final String SQL_INSERT = "insert into Authors (authorName) values (?)";
+    private final String SQL_INSERT = "insert into Authors (authorName) values (:authorName)";
     private final String SQL_GET_ALL = "select * from Authors";
     private final String SQL_DELETE_BY_ID = "delete from Authors where authorId = :authorId";
     private final String SQL_UPDATE = "update Authors set authorName = :authorName where authorId = :authorId";
@@ -43,12 +43,7 @@ public class AuthorDaoJdbc implements AuthorDao {
     @Override
     public long insert(Author author) {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        PreparedStatementCreator preparedStatementCreator = connection -> {
-            PreparedStatement ps = connection.prepareStatement(SQL_INSERT, new String[]{"authorId"});
-            ps.setString(1, author.getAuthorName());
-            return ps;
-        };
-        namedJdbc.getJdbcOperations().update(preparedStatementCreator, keyHolder);
+        namedJdbc.update(SQL_INSERT, new BeanPropertySqlParameterSource(author), keyHolder);
         return (long) keyHolder.getKey();
     }
 
