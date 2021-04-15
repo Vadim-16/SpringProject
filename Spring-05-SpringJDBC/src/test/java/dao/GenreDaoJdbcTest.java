@@ -1,77 +1,74 @@
 package dao;
 
-import ca.purpose.edu.Main;
-import ca.purpose.edu.dao.GenreDao;
+import ca.purpose.edu.dao.GenreDaoJdbc;
 import ca.purpose.edu.domain.Genre;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.shell.Shell;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest(classes = Main.class)
-@ExtendWith(SpringExtension.class)
+
+@JdbcTest
+@Sql("classpath:test-data.sql")
+@ContextConfiguration(classes = {GenreDaoJdbc.class})
 public class GenreDaoJdbcTest {
 
-    @MockBean
-    private Shell shell;
-
     @Autowired
-    private GenreDao genreDao;
+    private GenreDaoJdbc genreDao;
 
     @Test
-    @DisplayName("test author getById()")
+    @DisplayName("test genre getById()")
     public void testGetById() {
-        Genre genreFromDao = genreDao.getById(3);
-        Genre genre = new Genre(3, "Horror");
+        Genre genreFromDao = genreDao.getById(6);
+        Genre genre = new Genre(6, "testingGenre3");
         assertEquals(genreFromDao, genre);
     }
 
     @Test
-    @DisplayName("test author insert()")
+    @DisplayName("test genre insert()")
     public void testInsert() {
-        Genre genre = new Genre(4, "Science");
+        Genre genre = new Genre(7, "Science");
         long insertNumber = genreDao.insert(genre);
+        genre.setGenreId(insertNumber);
         Genre genreFromDao = genreDao.getById(insertNumber);
         assertEquals(genreFromDao, genre);
     }
 
     @Test
-    @DisplayName("test author count()")
+    @DisplayName("test genre count()")
     public void testCount() {
-        assertEquals(3, genreDao.count());
+        assertEquals(6, genreDao.count());
     }
 
     @Test
-    @DisplayName("test author delete()")
+    @DisplayName("test genre delete()")
     public void testDeleteById() {
-        boolean isDeleted = genreDao.deleteById(1);
-        assertThrows(EmptyResultDataAccessException.class, () -> genreDao.getById(1));
-        assertEquals(2, genreDao.count());
+        boolean isDeleted = genreDao.deleteById(4);
+        assertThrows(EmptyResultDataAccessException.class, () -> genreDao.getById(4));
+        assertEquals(5, genreDao.count());
     }
 
     @Test
-    @DisplayName("test author update()")
+    @DisplayName("test genre update()")
     public void testUpdate() {
-        Genre genre = new Genre(3, "Gogol");
+        Genre genre = new Genre(5, "Gogol");
         boolean isUpdated = genreDao.update(genre);
         Genre genreFromDao = genreDao.getById(genre.getGenreId());
         assertEquals(genreFromDao, genre);
     }
 
     @Test
-    @DisplayName("test author getAll()")
+    @DisplayName("test genre getAll()")
     public void testGetAll() {
-        assertEquals(2, genreDao.getAll().size());
-        boolean isDeleted = genreDao.deleteById(2);
-        assertEquals(1, genreDao.getAll().size());
+        assertEquals(6, genreDao.getAll().size());
+        boolean isDeleted = genreDao.deleteById(4);
+        assertEquals(5, genreDao.getAll().size());
     }
 }
 

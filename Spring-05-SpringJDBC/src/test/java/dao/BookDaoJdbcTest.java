@@ -1,32 +1,27 @@
 package dao;
 
-
-import ca.purpose.edu.Main;
 import ca.purpose.edu.dao.BookDao;
+import ca.purpose.edu.dao.BookDaoJdbc;
 import ca.purpose.edu.domain.Author;
 import ca.purpose.edu.domain.Book;
 import ca.purpose.edu.domain.Genre;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.shell.Shell;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@SpringBootTest(classes = Main.class)
-@ExtendWith(SpringExtension.class)
+@JdbcTest
+@Sql("classpath:test-data.sql")
+@ContextConfiguration(classes = {BookDaoJdbc.class})
 public class BookDaoJdbcTest {
-
-    @MockBean
-    private Shell shell;
 
     @Autowired
     private BookDao bookDao;
@@ -34,18 +29,19 @@ public class BookDaoJdbcTest {
     @Test
     @DisplayName("test book getById()")
     public void testGetById() {
-        Book bookFromDao = bookDao.getById(1);
-        Book book = new Book(1, "Insomnia", new Author(2, "Gellar"),
-                new Genre(3, "Horror"));
+        Book bookFromDao = bookDao.getById(6);
+        Book book = new Book(6, "testingBook3", new Author(4, "testingAuthor1"),
+                new Genre(6, "testingGenre3"));
         assertEquals(bookFromDao, book);
     }
 
     @Test
     @DisplayName("test book insert()")
     public void testInsert() {
-        Book book = new Book(4, "Insomnia", new Author(2, "Gellar"),
-                new Genre(3, "Horror"));
+        Book book = new Book(7, "testingBook4", new Author(4, "testingAuthor1"),
+                new Genre(6, "testingGenre3"));
         long insertNumber = bookDao.insert(book);
+        book.setBookId(insertNumber);
         Book bookFromDao = bookDao.getById(insertNumber);
         assertEquals(bookFromDao, book);
     }
@@ -53,23 +49,23 @@ public class BookDaoJdbcTest {
     @Test
     @DisplayName("test book count()")
     public void testCount() {
-        assertEquals(3, bookDao.count());
+        assertEquals(6, bookDao.count());
     }
 
     @Test
     @DisplayName("test book delete()")
     public void testDeleteById() {
-        assertEquals(3, bookDao.count());
-        boolean isDeleted = bookDao.deleteById(1);
-        assertThrows(EmptyResultDataAccessException.class, () -> bookDao.getById(1));
-        assertEquals(2, bookDao.count());
+        assertEquals(6, bookDao.count());
+        boolean isDeleted = bookDao.deleteById(5);
+        assertThrows(EmptyResultDataAccessException.class, () -> bookDao.getById(5));
+        assertEquals(5, bookDao.count());
     }
 
     @Test
     @DisplayName("test book update()")
     public void testUpdate() {
-        Book book = new Book(3, "Insomnia", new Author(2, "Gellar"),
-                new Genre(3, "Horror"));
+        Book book = new Book(6, "Insomnia", new Author(4, "testingAuthor1"),
+                new Genre(4, "testingGenre1"));
         boolean isUpdated = bookDao.update(book);
         Book bookFromDao = bookDao.getById(book.getBookId());
         assertEquals(bookFromDao, book);
@@ -78,8 +74,8 @@ public class BookDaoJdbcTest {
     @Test
     @DisplayName("test book getAll()")
     public void testGetAll() {
-        assertEquals(2, bookDao.getAll().size());
-        boolean isDeleted = bookDao.deleteById(2);
-        assertEquals(1, bookDao.getAll().size());
+        assertEquals(6, bookDao.getAll().size());
+        boolean isDeleted = bookDao.deleteById(4);
+        assertEquals(5, bookDao.getAll().size());
     }
 }
