@@ -21,6 +21,7 @@
         <module>Spring-03-SpringBootInitializr</module>
         <module>Spring-04-SpringShell</module>
         <module>Spring-05-SpringJDBC</module>
+        <module>Spring-06-SpringORM-JPA</module>
     </modules>
 
     <dependencies>
