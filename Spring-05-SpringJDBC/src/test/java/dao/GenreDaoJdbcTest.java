@@ -1,7 +1,7 @@
 package dao;
 
 import ca.purpose.edu.dao.GenreDaoJdbc;
-import ca.purpose.edu.domain.Genre;
+import ca.purpose.edu.models.Genre;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

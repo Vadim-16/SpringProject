@@ -2,9 +2,9 @@ package dao;
 
 import ca.purpose.edu.dao.BookDao;
 import ca.purpose.edu.dao.BookDaoJdbc;
-import ca.purpose.edu.domain.Author;
-import ca.purpose.edu.domain.Book;
-import ca.purpose.edu.domain.Genre;
+import ca.purpose.edu.models.Author;
+import ca.purpose.edu.models.Book;
+import ca.purpose.edu.models.Genre;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

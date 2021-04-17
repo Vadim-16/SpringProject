@@ -1,11 +1,11 @@
 package ca.purpose.edu.shell;
 
-import ca.purpose.edu.dao.AuthorDao;
-import ca.purpose.edu.dao.BookDao;
-import ca.purpose.edu.dao.GenreDao;
-import ca.purpose.edu.domain.Author;
-import ca.purpose.edu.domain.Book;
-import ca.purpose.edu.domain.Genre;
+
+import ca.purpose.edu.models.Author;
+import ca.purpose.edu.models.Book;
+import ca.purpose.edu.models.Genre;
+import ca.purpose.edu.repositories.BookRepositoryJpa;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
@@ -16,15 +16,10 @@ import java.time.format.DateTimeFormatter;
 @ShellComponent
 public class ApplicationEventCommands {
     private String userName;
-    private final BookDao bookDao;
-    private final AuthorDao authorDao;
-    private final GenreDao genreDao;
 
-    public ApplicationEventCommands(BookDao bookDao, AuthorDao authorDao, GenreDao genreDao) {
-        this.bookDao = bookDao;
-        this.authorDao = authorDao;
-        this.genreDao = genreDao;
-    }
+    @Autowired
+    private BookRepositoryJpa bookRepository;
+
 
     @ShellMethod(value = "Login command", key = {"l", "login"})
     public String login(@ShellOption(defaultValue = "user") String userName) {
@@ -44,7 +39,7 @@ public class ApplicationEventCommands {
         if (userName == null) System.out.println("Please login");
         else switch (objectName.toLowerCase()) {
             case "books": {
-                System.out.println("Total books: " + bookDao.count());
+                System.out.println("Total books: " + bookRepository.findAll().size());
                 break;
             }
             case "authors": {

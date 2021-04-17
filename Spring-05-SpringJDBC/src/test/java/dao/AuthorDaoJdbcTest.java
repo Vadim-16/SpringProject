@@ -2,7 +2,7 @@ package dao;
 
 import ca.purpose.edu.dao.AuthorDao;
 import ca.purpose.edu.dao.AuthorDaoJdbc;
-import ca.purpose.edu.domain.Author;
+import ca.purpose.edu.models.Author;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

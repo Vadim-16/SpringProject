@@ -1,6 +1,6 @@
 package ca.purpose.edu.dao;
 
-import ca.purpose.edu.domain.Genre;
+import ca.purpose.edu.models.Genre;
 
 import java.util.List;
 

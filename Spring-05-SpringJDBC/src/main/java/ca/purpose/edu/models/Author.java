@@ -1,4 +1,4 @@
-package ca.purpose.edu.domain;
+package ca.purpose.edu.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

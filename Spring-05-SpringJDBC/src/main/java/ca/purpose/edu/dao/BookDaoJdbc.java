@@ -1,17 +1,15 @@
 package ca.purpose.edu.dao;
 
-import ca.purpose.edu.domain.Author;
-import ca.purpose.edu.domain.Book;
-import ca.purpose.edu.domain.Genre;
+import ca.purpose.edu.models.Author;
+import ca.purpose.edu.models.Book;
+import ca.purpose.edu.models.Genre;
 import lombok.AllArgsConstructor;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

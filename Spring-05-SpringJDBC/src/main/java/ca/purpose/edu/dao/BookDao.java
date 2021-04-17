@@ -1,6 +1,6 @@
 package ca.purpose.edu.dao;
 
-import ca.purpose.edu.domain.Book;
+import ca.purpose.edu.models.Book;
 
 import java.util.List;
 

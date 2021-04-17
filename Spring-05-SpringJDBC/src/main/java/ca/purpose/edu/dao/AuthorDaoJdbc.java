@@ -1,6 +1,6 @@
 package ca.purpose.edu.dao;
 
-import ca.purpose.edu.domain.Author;
+import ca.purpose.edu.models.Author;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
