@@ -5,19 +5,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "Authors")
-public class Author {
+@Table(name = "Readers")
+public class Reader {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long authorId;
+    private long readerId;
 
-    @Column(name = "name", nullable = false, unique = true)
-    private String authorName;
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "reader")
+    private List<Comment> comments;
 }

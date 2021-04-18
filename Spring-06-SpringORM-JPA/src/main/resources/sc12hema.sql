@@ -1,6 +1,13 @@
 DROP TABLE IF EXISTS BOOKS;
 DROP TABLE IF EXISTS AUTHORS;
 DROP TABLE IF EXISTS GENRES;
+CREATE TABLE Books(
+    BookID BIGINT,
+    BookTitle VARCHAR(255) NOT NULL,
+    AuthorID BIGINT,
+    GenreID BIGINT,
+    PRIMARY KEY (bookID)
+);
 CREATE TABLE Authors(
     AuthorID BIGINT,
     BookID BIGINT references Books (BookID),
@@ -12,11 +19,4 @@ CREATE TABLE Genres(
     BookID BIGINT references Books (BookID),
     Genre VARCHAR(255) NOT NULL,
     PRIMARY KEY (GenreID)
-);
-CREATE TABLE Books(
-    BookID BIGINT,
-    BookTitle VARCHAR(255) NOT NULL,
-    AuthorID BIGINT,
-    GenreID BIGINT,
-    PRIMARY KEY (bookID)
 );

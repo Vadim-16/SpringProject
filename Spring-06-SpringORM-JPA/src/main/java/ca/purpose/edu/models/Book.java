@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -15,17 +16,21 @@ import javax.persistence.*;
 public class Book {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long bookId;
 
     @Column(name = "title", nullable = false, unique = true)
     private String bookTitle;
 
-    @OneToMany
+    @OneToMany(targetEntity = Genre.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_authorId")
-    private Author author;
+    private List<Author> author;
 
     @OneToMany(targetEntity = Genre.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "genre_genreId")
-    private Genre genre;
+    private List<Genre> genre;
+
+    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "commentId")
+    private Comment comment;
 }
