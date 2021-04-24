@@ -1,6 +1,5 @@
 package ca.purpose.edu.repositories;
 
-import ca.purpose.edu.models.Book;
 import ca.purpose.edu.models.Comment;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +24,11 @@ public class CommentRepositoryJpaImpl implements CommentRepositoryJpa {
     @Override
     public List<Comment> findAll() {
         return entityManager.createQuery("select c from Comment c", Comment.class).getResultList();
+    }
+
+    @Override
+    public List<Comment> findAllByBookId(long bookId) {
+        return entityManager.createQuery("select c from Comment c INNER JOIN Book b where b.bookId = :bookId", Comment.class).setParameter("bookId", bookId).getResultList();
     }
 
     @Override

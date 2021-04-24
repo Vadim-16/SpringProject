@@ -1,9 +1,6 @@
 package ca.purpose.edu.shell;
 
-
-import ca.purpose.edu.models.Author;
-import ca.purpose.edu.models.Book;
-import ca.purpose.edu.models.Genre;
+import ca.purpose.edu.models.*;
 import ca.purpose.edu.repositories.*;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -11,7 +8,8 @@ import org.springframework.shell.standard.ShellOption;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.List;
+
 
 @ShellComponent
 public class ApplicationEventCommands {
@@ -61,6 +59,14 @@ public class ApplicationEventCommands {
                 System.out.println("Total genres: " + genreRepository.findAll().size());
                 break;
             }
+            case "comments": {
+                System.out.println("Total comments: " + commentRepository.findAll().size());
+                break;
+            }
+            case "readers": {
+                System.out.println("Total readers: " + readerRepository.findAll().size());
+                break;
+            }
             default:
                 System.out.println("Improper object query: " + objectName);
         }
@@ -82,6 +88,14 @@ public class ApplicationEventCommands {
                 System.out.println(genreRepository.findById(objectId).orElse(null));
                 break;
             }
+            case "comment": {
+                System.out.println(commentRepository.findById(objectId).orElse(null));
+                break;
+            }
+            case "reader": {
+                System.out.println(readerRepository.findById(objectId).orElse(null));
+                break;
+            }
             default:
                 System.out.println("Improper object query: " + objectName);
         }
@@ -101,6 +115,14 @@ public class ApplicationEventCommands {
             }
             case "genres": {
                 System.out.println(genreRepository.findAll());
+                break;
+            }
+            case "comments": {
+                System.out.println(commentRepository.findAll());
+                break;
+            }
+            case "readers": {
+                System.out.println(readerRepository.findAll());
                 break;
             }
             default:
@@ -126,6 +148,14 @@ public class ApplicationEventCommands {
                     isDeleted = genreRepository.deleteById(objectId);
                     break;
                 }
+                case "comment": {
+                    isDeleted = commentRepository.deleteById(objectId);
+                    break;
+                }
+                case "reader": {
+                    isDeleted = readerRepository.deleteById(objectId);
+                    break;
+                }
                 default:
                     System.out.println("Improper object query: " + objectName);
             }
@@ -134,35 +164,6 @@ public class ApplicationEventCommands {
         }
     }
 
-//    @ShellMethod(value = "Update object", key = {"u", "update"})
-//    public void update(String object, long objectId, String objectName,
-//                       @ShellOption(defaultValue = "0") long authorId, @ShellOption(defaultValue = "0") long genreId) {
-//        if (userName == null) System.out.println("Please login");
-//        else {
-//            boolean isUpdated = false;
-//            switch (object.toLowerCase()) {
-//                case "book": {
-//                    Author author = authorDao.getById(authorId);
-//                    Genre genre = genreDao.getById(genreId);
-//                    isUpdated = bookDao.update(new Book(objectId, objectName, author, genre));
-//                    break;
-//                }
-//                case "author": {
-//                    isUpdated = authorDao.update(new Author(objectId, objectName));
-//                    break;
-//                }
-//                case "genre": {
-//                    isUpdated = genreDao.update(new Genre(objectId, objectName));
-//                    break;
-//                }
-//                default:
-//                    System.out.println("Improper object query: " + object);
-//            }
-//            String message = (isUpdated) ? "Update successful" : "Update failed";
-//            System.out.println(message);
-//        }
-//    }
-
     @ShellMethod(value = "Insert/update object", key = {"i", "u", "update", "insert"})
     public void insert(String object, String objectName, long objectId,
                        @ShellOption(defaultValue = "0") long authorId, @ShellOption(defaultValue = "0") long genreId) {
@@ -170,15 +171,9 @@ public class ApplicationEventCommands {
         else switch (object.toLowerCase()) {
             case "book": {
                 Author author = authorRepository.findById(authorId).orElse(null);
-                ArrayList<Author> authors = new ArrayList<>();
-                authors.add(author);
                 Genre genre = genreRepository.findById(genreId).orElse(null);
-                ArrayList<Genre> genres = new ArrayList<>();
-                genres.add(genre);
-                Comment comment = commentRepository.findById(commentId).orElse(null);
-                ArrayList<Genre> genres = new ArrayList<>();
-                genres.add(genre);
-                System.out.println("Generated/updated bookId: " + bookRepository.save(new Book(objectId, objectName, authors, genres, )).getBookId());
+                List<Comment> comments = bookRepository.findAllByBookId(objectId);
+                System.out.println("Generated/updated bookId: " + bookRepository.save(new Book(objectId, objectName, author, genre, comments)).getBookId());
                 break;
             }
             case "author": {
@@ -187,6 +182,17 @@ public class ApplicationEventCommands {
             }
             case "genre": {
                 System.out.println("Generated/updated genreId: " + genreRepository.save(new Genre(objectId, objectName)).getGenreId());
+                break;
+            }
+            case "comment": {
+                Reader reader = readerRepository.findById(authorId).orElse(null);
+                Book book = bookRepository.findById(genreId).orElse(null);
+                System.out.println("Generated/updated commentId: " + commentRepository.save(new Comment(objectId, objectName)).getCommentId());
+                break;
+            }
+            case "reader": {
+                List<Comment> comments = commentRepository.findAllByBookId(authorId);
+                System.out.println("Generated/updated readerId: " + readerRepository.save(new Reader(objectId, objectName, comments)).getReaderId());
                 break;
             }
             default:

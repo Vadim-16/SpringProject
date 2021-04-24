@@ -20,8 +20,11 @@ public class Comment {
     @Column(name = "comment", nullable = false)
     private String comment;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "readerId")
-    private Reader reader;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "readerId")
+//    private Reader reader;
+
+//    @ManyToOne()
+//    private Book book;
 
 }
