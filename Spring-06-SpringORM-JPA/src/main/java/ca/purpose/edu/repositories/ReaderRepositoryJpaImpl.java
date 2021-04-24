@@ -1,6 +1,7 @@
 package ca.purpose.edu.repositories;
 
 import ca.purpose.edu.models.Book;
+import ca.purpose.edu.models.Comment;
 import ca.purpose.edu.models.Reader;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,16 @@ public class ReaderRepositoryJpaImpl implements ReaderRepositoryJpa {
     @Override
     public List<Reader> findAll() {
         return entityManager.createQuery("select r from Reader r", Reader.class).getResultList();
+    }
+
+    @Override
+    public List<Comment> findCommentsByReaderId(long readerId) {
+        return entityManager.createQuery("select c from Reader r INNER JOIN Comment c where r.readerId = :readerId", Comment.class).setParameter("readerId", readerId).getResultList();
+    }
+
+    @Override
+    public List<Book> findBooksByReaderId(long readerId) {
+        return entityManager.createQuery("select b from Reader r INNER JOIN Book b where r.readerId = :readerId", Book.class).setParameter("readerId", readerId).getResultList();
     }
 
     @Override

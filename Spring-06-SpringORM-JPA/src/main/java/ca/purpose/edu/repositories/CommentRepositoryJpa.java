@@ -11,7 +11,7 @@ public interface CommentRepositoryJpa {
 
     List<Comment> findAll();
 
-    List<Comment> findAllByBookId(long bookId);
+    List<Comment> findCommentsByBookId(long bookId);
 
     Comment save(Comment comment);
 

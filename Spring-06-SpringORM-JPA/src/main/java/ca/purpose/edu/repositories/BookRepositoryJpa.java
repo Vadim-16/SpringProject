@@ -1,7 +1,7 @@
 package ca.purpose.edu.repositories;
 
 import ca.purpose.edu.models.Book;
-import ca.purpose.edu.models.Comment;
+import ca.purpose.edu.models.Reader;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +11,7 @@ public interface BookRepositoryJpa {
 
     List<Book> findAll();
 
-    List<Comment> findAllByBookId(long bookId);
+    List<Reader> findCommentsByBookId(long bookId);
 
     Book save(Book book);
 

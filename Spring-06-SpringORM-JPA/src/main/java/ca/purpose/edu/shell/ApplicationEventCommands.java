@@ -172,8 +172,7 @@ public class ApplicationEventCommands {
             case "book": {
                 Author author = authorRepository.findById(authorId).orElse(null);
                 Genre genre = genreRepository.findById(genreId).orElse(null);
-                List<Comment> comments = bookRepository.findAllByBookId(objectId);
-                System.out.println("Generated/updated bookId: " + bookRepository.save(new Book(objectId, objectName, author, genre, comments)).getBookId());
+                System.out.println("Generated/updated bookId: " + bookRepository.save(new Book(objectId, objectName, author, genre)).getBookId());
                 break;
             }
             case "author": {
@@ -191,8 +190,9 @@ public class ApplicationEventCommands {
                 break;
             }
             case "reader": {
-                List<Comment> comments = commentRepository.findAllByBookId(authorId);
-                System.out.println("Generated/updated readerId: " + readerRepository.save(new Reader(objectId, objectName, comments)).getReaderId());
+                List<Comment> comments = readerRepository.findCommentsByReaderId(authorId);
+                List<Book> books = readerRepository.findBooksByReaderId(genreId);
+                System.out.println("Generated/updated readerId: " + readerRepository.save(new Reader(objectId, objectName, comments, books)).getReaderId());
                 break;
             }
             default:

@@ -1,7 +1,7 @@
 package ca.purpose.edu.repositories;
 
 import ca.purpose.edu.models.Book;
-import ca.purpose.edu.models.Comment;
+import ca.purpose.edu.models.Reader;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +28,8 @@ public class BookRepositoryJpaImpl implements BookRepositoryJpa {
     }
 
     @Override
-    public List<Comment> findAllByBookId(long bookId) {
-        return entityManager.createQuery("select c from Book b INNER JOIN Comment c where b.bookId = :bookId", Comment.class).setParameter("bookId", bookId).getResultList();
+    public List<Reader> findCommentsByBookId(long bookId) {
+        return entityManager.createQuery("select c from Book b INNER JOIN Reader r where b.bookId = :bookId", Reader.class).setParameter("bookId", bookId).getResultList();
     }
 
     @Override
