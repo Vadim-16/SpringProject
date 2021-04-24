@@ -1,7 +1,6 @@
 package ca.purpose.edu.repositories;
 
 import ca.purpose.edu.models.Author;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

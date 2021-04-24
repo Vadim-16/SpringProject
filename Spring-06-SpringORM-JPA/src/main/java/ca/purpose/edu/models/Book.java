@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @AllArgsConstructor
@@ -23,14 +22,11 @@ public class Book {
     private String bookTitle;
 
     @OneToOne(targetEntity = Author.class, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "author_authorId")
+    @JoinColumn(name = "author_Id")
     private Author author;
 
     @OneToOne(targetEntity = Genre.class, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "genre_genreId")
+    @JoinColumn(name = "genre_Id")
     private Genre genre;
 
-//    @OneToMany(targetEntity = Reader.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "reader_readerId")
-//    private List<Reader> readers;
 }

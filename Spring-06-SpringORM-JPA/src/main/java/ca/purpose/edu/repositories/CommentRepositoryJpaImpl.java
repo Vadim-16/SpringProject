@@ -27,11 +27,6 @@ public class CommentRepositoryJpaImpl implements CommentRepositoryJpa {
     }
 
     @Override
-    public List<Comment> findCommentsByBookId(long bookId) {
-        return entityManager.createQuery("select c from Comment c INNER JOIN Book b where b.bookId = :bookId", Comment.class).setParameter("bookId", bookId).getResultList();
-    }
-
-    @Override
     public Comment save(Comment comment) {
         if (comment.getCommentId() <= 0) {
             entityManager.persist(comment);

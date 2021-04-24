@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -20,11 +21,12 @@ public class Comment {
     @Column(name = "comment", nullable = false)
     private String comment;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "readerId")
-//    private Reader reader;
+    @ManyToOne(targetEntity = Reader.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "reader_Id")
+    private Reader reader;
 
-//    @ManyToOne()
-//    private Book book;
+    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_Id")
+    private Book book;
 
 }

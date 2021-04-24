@@ -11,8 +11,6 @@ public interface CommentRepositoryJpa {
 
     List<Comment> findAll();
 
-    List<Comment> findCommentsByBookId(long bookId);
-
     Comment save(Comment comment);
 
     boolean deleteById(long commentId);

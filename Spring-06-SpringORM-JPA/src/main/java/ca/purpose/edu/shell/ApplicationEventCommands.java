@@ -8,7 +8,6 @@ import org.springframework.shell.standard.ShellOption;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 
 @ShellComponent
@@ -165,7 +164,7 @@ public class ApplicationEventCommands {
     }
 
     @ShellMethod(value = "Insert/update object", key = {"i", "u", "update", "insert"})
-    public void insert(String object, String objectName, long objectId,
+    public void insert(String object, String objectName, @ShellOption(defaultValue = "0") long objectId,
                        @ShellOption(defaultValue = "0") long authorId, @ShellOption(defaultValue = "0") long genreId) {
         if (userName == null) System.out.println("Please login");
         else switch (object.toLowerCase()) {
@@ -186,13 +185,11 @@ public class ApplicationEventCommands {
             case "comment": {
                 Reader reader = readerRepository.findById(authorId).orElse(null);
                 Book book = bookRepository.findById(genreId).orElse(null);
-                System.out.println("Generated/updated commentId: " + commentRepository.save(new Comment(objectId, objectName)).getCommentId());
+                System.out.println("Generated/updated commentId: " + commentRepository.save(new Comment(objectId, objectName, reader, book)).getCommentId());
                 break;
             }
             case "reader": {
-                List<Comment> comments = readerRepository.findCommentsByReaderId(authorId);
-                List<Book> books = readerRepository.findBooksByReaderId(genreId);
-                System.out.println("Generated/updated readerId: " + readerRepository.save(new Reader(objectId, objectName, comments, books)).getReaderId());
+                System.out.println("Generated/updated readerId: " + readerRepository.save(new Reader(objectId, objectName)).getReaderId());
                 break;
             }
             default:
