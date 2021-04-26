@@ -42,6 +42,6 @@ public class GenreRepositoryJpaImpl implements GenreRepositoryJpa {
 
     @Override
     public long count() {
-        return entityManager.createQuery("select count(g.genreId) from Author g", Long.class).getSingleResult();
+        return entityManager.createQuery("select count(g.genreId) from Genre g", Long.class).getSingleResult();
     }
 }

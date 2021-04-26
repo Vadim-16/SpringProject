@@ -12,10 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 @DataJpaTest
@@ -53,7 +53,7 @@ public class TestAuthorRepositoryJpaImpl {
     public void testSave() {
         Author author7 = new Author(7, "TestingAuthor7");
         authorRepository.save(author7);
-        Author authorFromJpa = authorRepository.findById(7L).get();
+        Author authorFromJpa = entityManager.find(Author.class, 7L);
         assertEquals(authorFromJpa, author7);
     }
 
@@ -62,7 +62,7 @@ public class TestAuthorRepositoryJpaImpl {
     public void testDeleteById() {
         assertEquals(6, authorRepository.count());
         authorRepository.deleteById(5);
-        assertEquals(Optional.empty(), authorRepository.findById(5));
+        assertNull(entityManager.find(Author.class, 5L));
         assertEquals(5, authorRepository.count());
     }
 

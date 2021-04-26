@@ -46,6 +46,6 @@ public class CommentRepositoryJpaImpl implements CommentRepositoryJpa {
 
     @Override
     public long count() {
-        return entityManager.createQuery("select count(c.commentId) from book c", Long.class).getSingleResult();
+        return entityManager.createQuery("select count(c.commentId) from Comment c", Long.class).getSingleResult();
     }
 }

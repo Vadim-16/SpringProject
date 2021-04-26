@@ -46,6 +46,6 @@ public class BookRepositoryJpaImpl implements BookRepositoryJpa {
 
     @Override
     public long count() {
-        return entityManager.createQuery("select count(b.bookId) from book b", Long.class).getSingleResult();
+        return entityManager.createQuery("select count(b.bookId) from Book b", Long.class).getSingleResult();
     }
 }
