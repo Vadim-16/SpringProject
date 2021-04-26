@@ -1,0 +1,15 @@
+INSERT INTO Authors (author_Id, `name`) VALUES (1, 'Hosie-Bournar');
+INSERT INTO Authors (author_Id, `name`) VALUES (2, 'Gellar');
+INSERT INTO Authors (author_Id, `name`) VALUES (3, 'Hart');
+INSERT INTO Genres (genre_Id, `genre`) VALUES (1, 'Design');
+INSERT INTO Genres (genre_Id, `genre`) VALUES (2, 'Web');
+INSERT INTO Genres (genre_Id, `genre`) VALUES (3, 'Horror');
+INSERT INTO Readers (reader_Id, `name`) VALUES (1, 'Design');
+INSERT INTO Readers (reader_Id, `name`) VALUES (2, 'Web');
+INSERT INTO Readers (reader_Id, `name`) VALUES (3, 'Horror');
+INSERT INTO Books (book_Id, `title`, author_Id, genre_Id) VALUES (1, 'Insomnia', 2, 3);
+INSERT INTO Books (book_Id, `title`, author_Id, genre_Id) VALUES (2, 'WebServer', 3, 2);
+INSERT INTO Books (book_Id, `title`, author_Id, genre_Id) VALUES (3, 'Photoshop', 1, 1);
+INSERT INTO Comments (comment_Id, `comment`, reader_Id, book_Id) VALUES (1, 'good one', 2, 3);
+INSERT INTO Comments (comment_Id, `comment`, reader_Id, book_Id) VALUES (2, 'not bad! - recommended', 3, 2);
+INSERT INTO Comments (comment_Id, `comment`, reader_Id, book_Id) VALUES (3, 'so so, could be better', 1, 1);

@@ -1,0 +1,15 @@
+INSERT INTO Authors (author_Id, `name`) VALUES (4, 'TestingAuthor1');
+INSERT INTO Authors (author_Id, `name`) VALUES (5, 'TestingAuthor2');
+INSERT INTO Authors (author_Id, `name`) VALUES (6, 'TestingAuthor3');
+INSERT INTO Genres (genre_Id, `genre`) VALUES (4, 'TestingGenre1');
+INSERT INTO Genres (genre_Id, `genre`) VALUES (5, 'TestingGenre2');
+INSERT INTO Genres (genre_Id, `genre`) VALUES (6, 'TestingGenre3');
+INSERT INTO Readers (reader_Id, `name`) VALUES (4, 'TestingReader1');
+INSERT INTO Readers (reader_Id, `name`) VALUES (5, 'TestingReader2');
+INSERT INTO Readers (reader_Id, `name`) VALUES (6, 'TestingReader3');
+INSERT INTO Books (book_Id, `title`, author_Id, genre_Id) VALUES (4, 'TestingBook1', 4, 5);
+INSERT INTO Books (book_Id, `title`, author_Id, genre_Id) VALUES (5, 'TestingBook2', 6, 4);
+INSERT INTO Books (book_Id, `title`, author_Id, genre_Id) VALUES (6, 'TestingBook3', 6, 5);
+INSERT INTO Comments (comment_Id, `comment`, reader_Id, book_Id) VALUES (4, 'TestingComment1', 6, 4);
+INSERT INTO Comments (comment_Id, `comment`, reader_Id, book_Id) VALUES (5, 'TestingComment2', 5, 4);
+INSERT INTO Comments (comment_Id, `comment`, reader_Id, book_Id) VALUES (6, 'TestingComment3', 5, 6);
